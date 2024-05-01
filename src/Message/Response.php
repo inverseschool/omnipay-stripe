@@ -87,14 +87,12 @@ class Response extends AbstractResponse implements RedirectResponseInterface
      */
     public function getTransactionReference()
     {
-        if (isset($this->data['object']) && 'charge' === $this->data['object']) {
-            return $this->data['id'];
-        }
         if (isset($this->data['error']) && isset($this->data['error']['charge'])) {
+
             return $this->data['error']['charge'];
         }
 
-        return null;
+        return isset($this->data['id']) ? $this->data['id'] : null;;
     }
 
     /**
