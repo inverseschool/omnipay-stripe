@@ -3,6 +3,7 @@
 /**
  * Stripe Response.
  */
+
 namespace Omnipay\Stripe\Message;
 
 use Omnipay\Common\Message\AbstractResponse;
@@ -54,9 +55,9 @@ class Response extends AbstractResponse implements RedirectResponseInterface
     /**
      * Get the charge reference from the response of FetchChargeRequest.
      *
-     * @deprecated 2.3.3:3.0.0 duplicate of \Omnipay\Stripe\Message\Response::getTransactionReference()
-     * @see \Omnipay\Stripe\Message\Response::getTransactionReference()
      * @return array|null
+     * @see \Omnipay\Stripe\Message\Response::getTransactionReference()
+     * @deprecated 2.3.3:3.0.0 duplicate of \Omnipay\Stripe\Message\Response::getTransactionReference()
      */
     public function getChargeReference()
     {
@@ -191,12 +192,12 @@ class Response extends AbstractResponse implements RedirectResponseInterface
         }
 
         if (isset($this->data['object']) && 'charge' === $this->data['object']) {
-            if (! empty($this->data['source'])) {
+            if (!empty($this->data['source'])) {
                 if (!empty($this->data['source']['three_d_secure']['card'])) {
                     return $this->data['source']['three_d_secure']['card'];
                 }
 
-                if (! empty($this->data['source']['id'])) {
+                if (!empty($this->data['source']['id'])) {
                     return $this->data['source']['id'];
                 }
             }
@@ -474,13 +475,7 @@ class Response extends AbstractResponse implements RedirectResponseInterface
      */
     public function isRedirect()
     {
-        if (isset($this->data['object']) && 'source' === $this->data['object']) {
-            if ($this->cardCan3DS() || ($this->isThreeDSecureSourcePending() && $this->getRedirectUrl() !== null)) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->getRedirectUrl() !== null;
     }
 
     /**
@@ -522,14 +517,7 @@ class Response extends AbstractResponse implements RedirectResponseInterface
      */
     public function getRedirectUrl()
     {
-        if (isset($this->data['object']) && 'source' === $this->data['object'] &&
-            isset($this->data['type']) && 'three_d_secure' === $this->data['type'] &&
-            !empty($this->data['redirect']['url'])
-        ) {
-            return $this->data['redirect']['url'];
-        }
-
-        return null;
+        return isset($this->data['url']) ? $this->data['url'] : null;
     }
 
     /**
