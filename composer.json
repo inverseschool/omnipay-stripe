@@ -1,7 +1,7 @@
 {
-    "name": "omnipay/stripe",
+    "name": "inverseschool/omnipay-stripe",
     "type": "library",
-    "description": "Stripe driver for the Omnipay payment processing library",
+    "description": "Stripe driver for the Omnipay payment processing library for Inverseschool.com/online usecase.",
     "keywords": [
         "gateway",
         "merchant",
