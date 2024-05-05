@@ -6,6 +6,8 @@
 
 namespace Omnipay\Stripe\Message\Checkout;
 
+use Omnipay\Stripe\Message\PurchaseResponse;
+
 /**
  * Stripe Checkout Session Request
  *
@@ -35,6 +37,7 @@ class PurchaseRequest extends AbstractRequest
     {
         return $this->getParameter('success_url');
     }
+
     /**
      * Set the cancel url
      *
@@ -161,6 +164,11 @@ class PurchaseRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/checkout/sessions';
+        return $this->endpoint . '/checkout/sessions';
+    }
+
+    protected function createResponse($data, $headers = [])
+    {
+        return $this->response = new PurchaseResponse($this, $data, $headers);
     }
 }
