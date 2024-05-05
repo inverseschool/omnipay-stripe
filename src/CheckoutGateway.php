@@ -35,6 +35,11 @@ class CheckoutGateway extends AbstractGateway
         return $this->createRequest('\Omnipay\Stripe\Message\Checkout\PurchaseRequest', $parameters);
     }
 
+    public function completePurchase(array $parameters = array()): \Omnipay\Common\Message\RequestInterface
+    {
+        return $this->createRequest('\Omnipay\Stripe\Message\Checkout\CompletePurchaseRequest', $parameters);
+    }
+
     /**
      * @inheritdoc
      * @return \Omnipay\Stripe\Message\Checkout\PurchaseRequest

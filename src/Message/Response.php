@@ -92,7 +92,7 @@ class Response extends AbstractResponse implements RedirectResponseInterface
             return $this->data['error']['charge'];
         }
 
-        return isset($this->data['id']) ? $this->data['id'] : null;;
+        return isset($this->data['id']) ? $this->data['id'] : null;
     }
 
     /**
