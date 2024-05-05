@@ -21,6 +21,11 @@ class CompletePurchaseRequest extends AbstractRequest
         return [];
     }
 
+    public function getHttpMethod()
+    {
+        return 'GET';
+    }
+
     public function getEndpoint()
     {
         return $this->endpoint . '/checkout/sessions/' . $this->getTransactionReference();
