@@ -9,6 +9,7 @@ namespace Omnipay\Stripe\Message;
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RedirectResponseInterface;
 use Omnipay\Common\Message\RequestInterface;
+use Omnipay\Stripe\Constants\StripePaymentStatus;
 
 /**
  * Stripe Response.
@@ -45,7 +46,7 @@ class Response extends AbstractResponse implements RedirectResponseInterface
      */
     public function isSuccessful()
     {
-        return !isset($this->data['error']);
+        return !isset($this->data['error']) && $this->status === StripePaymentStatus::PAID;
     }
 
     /**
