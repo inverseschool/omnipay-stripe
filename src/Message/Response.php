@@ -46,7 +46,9 @@ class Response extends AbstractResponse implements RedirectResponseInterface
      */
     public function isSuccessful()
     {
-        return !isset($this->data['error']) && $this->status === StripePaymentStatus::PAID;
+        return !isset($this->data['error']) &&
+            $this->data['status'] === 'complete' &&
+            $this->data['payment_status'] === StripePaymentStatus::PAID;
     }
 
     /**
